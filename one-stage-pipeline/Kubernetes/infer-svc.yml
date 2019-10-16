@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: infer
+  labels:
+    name: infer
+    app: demo
+spec:
+  selector:
+    name: infer
+  type: NodePort
+  ports:
+   - port: 80
+     targetPort: 5000
+     protocol: TCP

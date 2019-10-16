@@ -1,0 +1,15 @@
+apiVersion: "v1"
+kind: Pod
+metadata:
+  name: infer
+  labels:
+    name: infer
+    app: demo
+spec:
+  containers:
+    - name: infer
+      image: praveen049/inf
+      ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
