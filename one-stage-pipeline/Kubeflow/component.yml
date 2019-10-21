@@ -1,0 +1,11 @@
+name: deploy
+description: Deploy single stage inference model for linear regression
+metadata:
+  labels:
+    name: infer
+    add-pod-env: 'true'
+inputs:
+outputs:
+implementation:
+  container:
+    image: praveen049/inf
