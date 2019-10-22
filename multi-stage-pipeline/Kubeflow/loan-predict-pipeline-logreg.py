@@ -6,6 +6,7 @@ def pipeline(project_id='loan-predict'):
     preprocessor = dsl.ContainerOp(
         name='preprocessor',
         image='praveen049/loan-predict-logreg-preproc',
+        command=['python', 'preproc/preprocessor.py'],
         arguments=[
             '--project_id', project_id,
             '--output-x-path', 'x.pkl',
@@ -21,6 +22,7 @@ def pipeline(project_id='loan-predict'):
     trainer = dsl.ContainerOp(
         name='trainer',
         image='praveen049/loan-predict-logreg-train',
+        command=['python', 'train/train.py'],
         arguments=[
             '--project_id', project_id,
             'input-x-path', preprocessor.outputs['x-output'],

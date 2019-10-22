@@ -3,7 +3,6 @@ from pathlib import Path
 import argparse
 import os
 import pandas as pd
-from tensorflow import gfile
 import pickle
 import warnings
 warnings.filterwarnings("ignore")
@@ -66,10 +65,10 @@ X = pd.get_dummies(X)
 #gfile.MakeDirs(os.path.dirname(args.output_x_path))
 #gfile.MakeDirs(os.path.dirname(args.output_y_path))
 
-with gfile.GFile(args.output_x_path, 'w') as output_X:
+with open(args.output_x_path, 'w') as output_X:
   pickle.dump(X, output_X)
 
-with gfile.GFile(args.output_y_path, 'w') as output_y:
+with open(args.output_y_path, 'w') as output_y:
   pickle.dump(y, output_y)
 
 
