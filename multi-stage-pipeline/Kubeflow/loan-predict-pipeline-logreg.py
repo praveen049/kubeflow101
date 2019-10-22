@@ -10,9 +10,9 @@ def pipeline(project_id='loan-predict'):
         arguments=[
             '--project_id', project_id,
             '--output-x-path', 'x.pkl',
-            '--output-x-path-file', 'x.txt'
-            '--output-y-path', 'y.pkl'
-            '--output-y-path-file', 'y.txt'
+            '--output-x-path-file', 'x.txt',
+            '--output-y-path', 'y.pkl',
+            '--output-y-path-file', 'y.txt',
     ],
         file_outputs={
             'x-output': 'x.pkl',
@@ -25,10 +25,10 @@ def pipeline(project_id='loan-predict'):
         command=['python', 'train/train.py'],
         arguments=[
             '--project_id', project_id,
-            'input-x-path', preprocessor.outputs['x-output'],
-            'input-y-path', preprocessor.outputs['y-output'],
-            'output-model-path', 'model.pkl',
-            'output-model-path-file', 'model.txt'
+            '--input-x-path', preprocessor.outputs['x-output'],
+            '--input-y-path', preprocessor.outputs['y-output'],
+            '--output-model-path', 'model.pkl',
+            '--output-model-path-file', 'model.txt'
         ],
         file_outputs={
             'model': 'model.pkl',
