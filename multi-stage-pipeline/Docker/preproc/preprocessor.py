@@ -65,10 +65,11 @@ X = pd.get_dummies(X)
 #gfile.MakeDirs(os.path.dirname(args.output_x_path))
 #gfile.MakeDirs(os.path.dirname(args.output_y_path))
 
-with open(args.output_x_path, 'w') as output_X:
+
+with open(args.output_x_path, 'wb') as output_X:
   pickle.dump(X, output_X)
 
-with open(args.output_y_path, 'w') as output_y:
+with open(args.output_y_path, 'wb') as output_y:
   pickle.dump(y, output_y)
 
 
