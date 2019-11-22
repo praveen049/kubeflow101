@@ -9,7 +9,9 @@ from sklearn.metrics import accuracy_score
 
 
 def load_feature(input_x_path):
+  print (input_x_path)
   with open(input_x_path, 'rb') as input_x_file:
+    print ('File exists')
     return pickle.loads(input_x_file.read())
 
 
@@ -33,15 +35,15 @@ x_train, x_cv, y_train, y_cv = train_test_split(X, y,
                                              test_size=0.3,
                                              random_state=1)
 
-logistic_model = LogisticRegression(random_state=1)
+logistic_model = LogisticRegression(random_state=1, solver='liblinear')
 
-logistic_model.fit(x_train,y_train)
+logistic_model.fit(x_train,y_train.values.ravel())
 
 pred_cv_logistic = logistic_model.predict(x_cv)
 score_logistic = accuracy_score(pred_cv_logistic,y_cv)*100
 
 
-with open(args.output_model_path, 'w') as output_model:
+with open(args.output_model_path, 'wb') as output_model:
   pickle.dump(logistic_model, output_model)
 
 Path(args.output_model_path_file).parent.mkdir(parents=True, exist_ok=True)
