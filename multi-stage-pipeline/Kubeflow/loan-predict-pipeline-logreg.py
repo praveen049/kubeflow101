@@ -8,14 +8,12 @@ def pipeline(project_id='loan-predict'):
         image='praveen049/loan-predict-logreg-preproc',
         command=['python', 'preprocessor.py'],
         arguments=[
-            '--output-x', '/x.pkl',
-            '--output-x-path-file', '/x.txt',
-            '--output-y', '/y.pkl',
-            '--output-y-path-file', '/y.txt',
+            '--output-x', {outputPath: '/x.pkl'},
+            '--output-x-path-file', {outputPath: '/x.txt'},
+            '--output-y', {outputPath: '/y.pkl'},
+            '--output-y-path-file', {outputPath: '/y.txt'},
     ],
         file_outputs={
-            'x-file': '/x.pkl',
-            'y-file': '/y.pkl',
             'x-output': '/x.txt',
             'y-output': '/y.txt',
         }
