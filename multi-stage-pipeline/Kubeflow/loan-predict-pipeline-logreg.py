@@ -14,8 +14,8 @@ def pipeline(project_id='loan-predict'):
             '--output-y-path-file', '/tmp/y.txt',
     ],
         file_outputs={
-            'x-output': '/tmp/x.pkl',
-            'y-output': '/tmp/y.pkl',
+            'x-output': '/tmp/x.txt',
+            'y-output': '/tmp/y.txt',
         }
     )
     trainer = dsl.ContainerOp(
