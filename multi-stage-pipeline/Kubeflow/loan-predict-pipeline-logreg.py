@@ -8,9 +8,9 @@ def pipeline(project_id='loan-predict'):
         image='praveen049/loan-predict-logreg-preproc',
         command=['python', 'preprocessor.py'],
         arguments=[
-            '--output-x-path', '/tmp/x.pkl',
+            '--output-x', '/tmp/x.pkl',
             '--output-x-path-file', '/tmp/x.txt',
-            '--output-y-path', '/tmp/y.pkl',
+            '--output-y', '/tmp/y.pkl',
             '--output-y-path-file', '/tmp/y.txt',
     ],
         file_outputs={
@@ -23,10 +23,10 @@ def pipeline(project_id='loan-predict'):
         image='praveen049/loan-predict-logreg-train',
         command=['python', 'train.py'],
         arguments=[
-            '--input-x-path', preprocessor.outputs['x-output'],
-            '--input-y-path', preprocessor.outputs['y-output'],
-            '--output-model-path', '/tmp/model.pkl',
-            '--output-model-path-file', '/tmp/model.txt'
+            '--input_x_path_file', preprocessor.outputs['x-output'],
+            '--input_y_path_file', preprocessor.outputs['y-output'],
+            '--output_model', '/tmp/model.pkl',
+            '--output_model_path_file', '/tmp/model.txt'
         ],
         file_outputs={
             'model': '/tmp/model.pkl',
