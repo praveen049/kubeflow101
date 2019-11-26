@@ -10,10 +10,10 @@ warnings.filterwarnings("ignore")
 # Handle the input argument
 parser = argparse.ArgumentParser(description='My program description')
 
-parser.add_argument('--output-x-path', type=str, help='')
+parser.add_argument('--output-x', type=str, help='')
 parser.add_argument('--output-x-path-file', type=str, help='')
 
-parser.add_argument('--output-y-path', type=str, help='')
+parser.add_argument('--output-y', type=str, help='')
 parser.add_argument('--output-y-path-file', type=str, help='')
 args = parser.parse_args()
 
@@ -66,15 +66,15 @@ X = pd.get_dummies(X)
 #gfile.MakeDirs(os.path.dirname(args.output_y_path))
 
 
-with open(args.output_x_path, 'wb') as output_X:
+with open(args.output_x, 'wb') as output_X:
   pickle.dump(X, output_X)
 
-with open(args.output_y_path, 'wb') as output_y:
+with open(args.output_y, 'wb') as output_y:
   pickle.dump(y, output_y)
 
 
 Path(args.output_x_path_file).parent.mkdir(parents=True, exist_ok=True)
-Path(args.output_x_path_file).write_text(args.output_x_path)
+Path(args.output_x_path_file).write_text(args.output_x)
 
 Path(args.output_y_path_file).parent.mkdir(parents=True, exist_ok=True)
-Path(args.output_y_path_file).write_text(args.output_y_path)
+Path(args.output_y_path_file).write_text(args.output_y)

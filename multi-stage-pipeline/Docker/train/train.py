@@ -8,28 +8,28 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 
-def load_feature(input_x_path):
-  print (input_x_path)
-  with open(input_x_path, 'rb') as input_x_file:
+def load_feature(input_x_path_file):
+  print (input_x_path_file)
+  with open(input_x_path_file, 'rb') as input_x_file:
     print ('File exists')
     return pickle.loads(input_x_file.read())
 
 
-def load_label(input_y_path):
-  with open(input_y_path, 'rb') as input_y_file:
+def load_label(input_y_path_file):
+  with open(input_y_path_file, 'rb') as input_y_file:
     return pickle.loads(input_y_file.read())
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input-x-path', type=str, help='')
-parser.add_argument('--input-y-path', type=str, help='')
+parser.add_argument('--input_x_path_file', type=str, help='')
+parser.add_argument('--input_y_path_file', type=str, help='')
 
-parser.add_argument('--output-model-path', type=str, help='')
-parser.add_argument('--output-model-path-file', type=str, help='')
+parser.add_argument('--output_model', type=str, help='')
+parser.add_argument('--output_model_path_file', type=str, help='')
 
 args = parser.parse_args()
 
-X = load_feature(args.input_x_path)
-y = load_label(args.input_y_path)
+X = load_feature(args.input_x_path_file)
+y = load_label(args.input_y_path_file)
 
 x_train, x_cv, y_train, y_cv = train_test_split(X, y,
                                              test_size=0.3,
@@ -43,7 +43,7 @@ pred_cv_logistic = logistic_model.predict(x_cv)
 score_logistic = accuracy_score(pred_cv_logistic,y_cv)*100
 
 
-with open(args.output_model_path, 'wb') as output_model:
+with open(args.output_model, 'wb') as output_model:
   pickle.dump(logistic_model, output_model)
 
 Path(args.output_model_path_file).parent.mkdir(parents=True, exist_ok=True)
