@@ -25,7 +25,7 @@ def pipeline(project_id='loan-predict'):
         arguments=[
             '--input_x_path_file', dsl.InputArgumentPath(preprocessor.outputs['x-output']),
             '--input_y_path_file', dsl.InputArgumentPath(preprocessor.outputs['y-output']),
-            '--output_model_path', '/model.pkl',
+            '--output_model', '/model.pkl',
             '--output_model_path_file', '/model.txt',
         ],
         file_outputs={
