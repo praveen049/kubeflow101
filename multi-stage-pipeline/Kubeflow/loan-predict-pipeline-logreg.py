@@ -9,9 +9,7 @@ def pipeline(project_id='loan-predict'):
         command=['python', 'preprocessor.py'],
         arguments=[
             '--output-x', '/x.pkl',
-            '--output-x-path-file', '/x.txt',
             '--output-y', '/y.pkl',
-            '--output-y-path-file', '/y.txt',
     ],
         file_outputs={
             'x-output': '/x.pkl',
