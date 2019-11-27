@@ -8,14 +8,14 @@ def pipeline(project_id='loan-predict'):
         image='praveen049/loan-predict-logreg-preproc',
         command=['python', 'preprocessor.py'],
         arguments=[
-            '--output-x', {outputPath: '/x.pkl'},
-            '--output-x-path-file', {outputPath: '/x.txt'},
-            '--output-y', {outputPath: '/y.pkl'},
-            '--output-y-path-file', {outputPath: '/y.txt'},
+            '--output-x', '/x.pkl',
+            '--output-x-path-file', '/x.txt',
+            '--output-y', '/y.pkl',
+            '--output-y-path-file', '/y.txt',
     ],
         file_outputs={
-            'x-output': '/x.txt',
-            'y-output': '/y.txt',
+            'x-output': '/x.pkl',
+            'y-output': '/y.pkl',
         }
     )
     trainer = dsl.ContainerOp(
@@ -23,14 +23,13 @@ def pipeline(project_id='loan-predict'):
         image='praveen049/loan-predict-logreg-train',
         command=['python', 'train.py'],
         arguments=[
-            '--input_x_path_file', preprocessor.outputs['x-output'],
-            '--input_y_path_file', preprocessor.outputs['y-output'],
-            '--output_model', '/model.pkl',
-            '--output_model_path_file', '/model.txt'
+            '--input_x_path_file', dsl.InputArgumentPath(preprocessor.outputs['x-output']),
+            '--input_y_path_file', dsl.InputArgumentPath(preprocessor.outputs['y-output']),
+            '--output_model_path', '/model.pkl',
+            '--output_model_path_file', '/model.txt',
         ],
         file_outputs={
             'model': '/model.pkl',
-            'model-path': '/model.txt',
         }
     )
     trainer.after(preprocessor)
